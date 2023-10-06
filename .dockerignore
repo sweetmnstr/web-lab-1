@@ -1,0 +1,27 @@
+# Ignore node_modules directory (dependencies will be installed separately)
+node_modules
+
+# Ignore development and build-related files
+npm-debug.log
+yarn-error.log
+.DS_Store
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Ignore files related to version control
+.git
+.gitignore
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Ignore Docker-specific files (if using Docker Compose)
+.dockerignore
+.docker-compose.yml
+Dockerfile
