@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { DTOBodyValidatorMiddleware } from '../shared/utils/dto-wrapper/dto-wrappers.middleware';
 import { SaveEmailBodyInputDTO } from './dtos/input';
 import { basicWrappeRouter } from '../shared/utils/base-router.wrapper';
-import { AuthController } from './auth.controller';
+import { UserController } from './user.controller';
 
-const AuthRouter = Router();
+const UserRouter = Router();
 
-AuthRouter.post(
+UserRouter.post(
   '/save-email',
   DTOBodyValidatorMiddleware(SaveEmailBodyInputDTO),
-  basicWrappeRouter(AuthController.saveEmail),
+  basicWrappeRouter(UserController.saveEmail),
 );
 
-export default AuthRouter;
+export default UserRouter;

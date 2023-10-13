@@ -161,7 +161,8 @@
           <div class="mt-10 w-full flex max-w-md mx-auto lg:mx-0">
             <div class="flex sm:flex-row flex-col gap-5 w-full">
               <form
-                action="#"
+                action="http://localhost:3055/users/save-email"
+                method="POST"
                 class="py-1 pl-6 w-full pr-1 flex gap-3 items-center text-gray-600 shadow-lg shadow-gray-200/20 border border-gray-200 bg-gray-100 rounded-full ease-linear focus-within:bg-white focus-within:border-blue-600"
               >
                 <span class="min-w-max pr-2 border-r border-gray-200">
@@ -184,11 +185,12 @@
                 <input
                   type="email"
                   name=""
-                  id=""
+                  id="email_input"
                   placeholder="johndoe@gmail.com"
                   class="w-full py-3 outline-none bg-transparent"
                 />
                 <button
+                  id="email_button"
                   class="flex text-white justify-center items-center w-max min-w-max sm:w-max px-6 h-12 rounded-full outline-none relative overflow-hidden border duration-300 ease-linear after:absolute after:inset-x-0 after:aspect-square after:scale-0 after:opacity-70 after:origin-center after:duration-300 after:ease-linear after:rounded-full after:top-0 after:left-0 after:bg-[#172554] hover:after:opacity-100 hover:after:scale-[2.5] bg-blue-600 border-transparent hover:border-[#172554]"
                 >
                   <span class="hidden sm:flex relative z-[5]">
@@ -321,6 +323,33 @@
           }, 500);
         }, 3000);
       }
+
+      const emailInput = document.getElementById('email_input');
+      const emailButton = document.getElementById('email_button');
+      const saveEmailUrl = 'http://localhost:3055/users/save-email';
+
+      emailButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = emailInput.value;
+        if (email) {
+          fetch(saveEmailUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data?.message) {
+                alert(data.message);
+              } else {
+                alert(data.error);
+              }
+            });
+        }
+      });
     </script>
     <!-- Include Handlebars library here -->
   </body>

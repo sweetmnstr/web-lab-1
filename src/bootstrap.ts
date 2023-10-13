@@ -1,7 +1,7 @@
 import { Application } from 'express';
 import * as express from 'express';
 import * as cors from 'cors';
-import AuthRouter from './modules/auth/auth.router';
+import UserRouter from './modules/user/user.router';
 import { exceptionFilter } from './modules/shared/utils/exception-filter';
 import * as morgan from 'morgan';
 import * as path from 'path';
@@ -30,7 +30,7 @@ export async function bootstrap(): Promise<Application> {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  app.use('/auth', AuthRouter);
+  app.use('/users', UserRouter);
   app.use('/', PageRouter);
   app.use(exceptionFilter);
 

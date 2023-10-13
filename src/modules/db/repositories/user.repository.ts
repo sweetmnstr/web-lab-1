@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../shared/custom-errors';
+import { BadRequestError, NotFoundError } from '../../shared/custom-errors';
 import User, { IUser } from '../models/user.model';
 import { BaseRepository } from './base.repository';
 
@@ -23,6 +23,14 @@ class UserRepository extends BaseRepository<IUser> {
     const user = await this.findByEmail(email);
     if (!user) {
       throw new NotFoundError('User not found');
+    }
+    return user;
+  }
+
+  public async findByEmailAndThrow(email: string): Promise<IUser | null> {
+    const user = await this.findByEmail(email);
+    if (user) {
+      throw new BadRequestError('User already exists');
     }
     return user;
   }
